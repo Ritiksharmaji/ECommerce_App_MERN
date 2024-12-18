@@ -93,7 +93,7 @@
 13) ![alt text](image-5.png)
 14) ![alt text](image-6.png)
 15) ![alt text](image-7.png)
-16) mongodb+srv://ritiksharma555598:ritik@cluster0.km1ez.mongodb.net/
+16) 
 17) ![alt text](image-8.png)
 18) ![alt text](image-9.png)
 19) ![alt text](image-10.png)
