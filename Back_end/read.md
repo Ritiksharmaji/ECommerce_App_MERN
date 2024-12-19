@@ -97,5 +97,79 @@
 17) ![alt text](image-8.png)
 18) ![alt text](image-9.png)
 19) ![alt text](image-10.png)
-20) 
+20) mongoose.connect():> it wll return a promiss which should be either resolved or error.
+21) meaning for it app.use(cookieParser());
+
+## ----------- ans -- 
+The line `app.use(cookieParser());` in a Node.js and Express application means:
+
+### **What It Does**
+- **`cookieParser()`** is middleware that parses the cookies sent with client requests and makes them easily accessible in your application.
+- When you use this middleware, it populates a `cookies` object on the `req` (request) object, allowing you to access cookies as key-value pairs.
+
+---
+
+### **Why Use It?**
+1. **Simplifies Cookie Handling**:
+   - Instead of manually extracting and parsing the `Cookie` header, `cookieParser` does it for you.
+   
+2. **Access Cookies**:
+   - You can easily retrieve cookies from the client request using `req.cookies`.
+
+3. **Signed Cookies**:
+   - If you use signed cookies (for added security), it also verifies them using a secret key.
+
+---
+
+### **Example: Without and With `cookieParser`**
+
+#### **Without `cookieParser`:**
+You would need to manually parse the `Cookie` header:
+```javascript
+app.get('/', (req, res) => {
+  const rawCookies = req.headers.cookie; // "name=John; sessionID=abc123"
+  const cookies = Object.fromEntries(rawCookies.split('; ').map(c => c.split('=')));
+  console.log(cookies); // { name: 'John', sessionID: 'abc123' }
+});
+```
+
+#### **With `cookieParser`:**
+You just use `req.cookies`:
+```javascript
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+app.get('/', (req, res) => {
+  console.log(req.cookies); // { name: 'John', sessionID: 'abc123' }
+});
+```
+
+---
+
+### **Signed Cookies Example**
+If you want signed cookies for additional security:
+```javascript
+app.use(cookieParser('mySecretKey'));
+
+app.get('/', (req, res) => {
+  console.log(req.signedCookies); // Access signed cookies
+});
+```
+
+In this case, cookies must be signed with the secret (`mySecretKey`) when set, and `cookieParser` will verify their integrity.
+
+---
+
+### **Key Benefits**
+- Streamlines cookie parsing and access.
+- Works seamlessly with signed cookies for added security.
+- Makes it easier to read and manipulate cookies in your app.
+
+Let me know if you'd like an example of setting and reading cookies!
+
+22) include the "start": "index.js",
+    "dev": "nodemon index.js" in package.json in script section.
+23) to start this backend write the command as : npm run dev
+24) 
+
 
