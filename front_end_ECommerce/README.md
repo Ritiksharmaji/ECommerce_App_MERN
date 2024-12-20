@@ -128,3 +128,18 @@ The command above will add the Button component to your project. You can then im
 
 
 
+### ----------------------------------------
+20) create a input using ui.shadcn for that enter in terminal below command.. (https://ui.shadcn.com/docs/components/button)
+21) => npx shadcn@latest add input select label textarea 
+then output will come like below
+22) Checking registry.
+✔ Installing dependencies.
+✔ Created 4 files:
+  - src\components\ui\input.jsx
+  - src\components\ui\select.jsx
+  - src\components\ui\label.jsx
+  - src\components\ui\textarea.jsx
+
+23) to add the button write the below command in termilan then authometically button componnet will be created in component/ui/Button file.
+24) npx shadcn@latest add button
+25) npx shadcn@latest add toast
