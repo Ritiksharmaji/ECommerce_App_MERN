@@ -5,18 +5,7 @@ function CheckAuth({ isAuthenticated, user, children }) {
 
   console.log(location.pathname, isAuthenticated);
 
-  if (location.pathname === "/") {
-    if (!isAuthenticated) {
-      return <Navigate to="/auth/login" />;
-    } else {
-      if (user?.role === "admin") {
-        return <Navigate to="/admin/dashboard" />;
-      } else {
-        return <Navigate to="/shop/home" />;
-      }
-    }
-  }
-
+  // Redirect unauthenticated users to login page for protected routes
   if (
     !isAuthenticated &&
     !(
@@ -27,6 +16,7 @@ function CheckAuth({ isAuthenticated, user, children }) {
     return <Navigate to="/auth/login" />;
   }
 
+  // Prevent authenticated users from accessing login or register pages
   if (
     isAuthenticated &&
     (location.pathname.includes("/login") ||
@@ -39,22 +29,25 @@ function CheckAuth({ isAuthenticated, user, children }) {
     }
   }
 
+  // Restrict non-admin users from accessing admin routes
   if (
     isAuthenticated &&
     user?.role !== "admin" &&
-    location.pathname.includes("admin")
+    location.pathname.startsWith("/admin")
   ) {
     return <Navigate to="/unauth-page" />;
   }
 
+  // Restrict admin users from accessing shopping routes
   if (
     isAuthenticated &&
     user?.role === "admin" &&
-    location.pathname.includes("shop")
+    location.pathname.startsWith("/shop")
   ) {
     return <Navigate to="/admin/dashboard" />;
   }
 
+  // Allow navigation to the intended path if all conditions pass
   return <>{children}</>;
 }
 

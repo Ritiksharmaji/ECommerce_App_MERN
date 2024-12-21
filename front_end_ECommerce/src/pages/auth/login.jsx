@@ -1,7 +1,11 @@
 import CommonForm from "@/components/common/form";
-import {loginFormControls} from "@/config";
+// import { useToast } from "@/components/ui/use-toast";
+import { loginFormControls } from "@/config";
+import { loginUser } from "@/store/auth-slice";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const initialState = {
   email: "",
@@ -10,27 +14,42 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
-  
+  const dispatch = useDispatch();
+  const { toast } = useToast();
+
   function onSubmit(event) {
     event.preventDefault();
-  
-  }
 
-  console.log(formData);
+    dispatch(loginUser(formData)).then((data) => {
+      console.log(data);
+      console.log(data?.payload?.success);
+
+      if (data?.payload?.success) {
+        toast({
+          title: data?.payload?.message,
+        });
+      } else {
+        toast({
+          title: data?.payload?.message,
+          variant: "destructive",
+        });
+      }
+    });
+  }
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Login to your account
+          Sign in to your account
         </h1>
         <p className="mt-2">
-          New Register
+          Don't have an account
           <Link
             className="font-medium ml-2 text-primary hover:underline"
             to="/auth/register"
           >
-            Click Here
+            Register
           </Link>
         </p>
       </div>

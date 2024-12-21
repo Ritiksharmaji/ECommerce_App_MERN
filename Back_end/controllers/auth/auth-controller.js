@@ -97,6 +97,10 @@ const logoutUser = (req, res) => {
 };
 
 //auth middleware
+// ----------------- THIS IS THE MIDDLEWARE ---------------------------- 
+  // this is the middleware to check if the user is authenticated or not and if authenticated then get 
+  // the user data from the server which is stored in the redux store whre the user is authenticated 
+  // with the help of the token stored in the cookie with respect to the user role and id. 
 const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token)

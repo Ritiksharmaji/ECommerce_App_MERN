@@ -550,3 +550,9 @@ This mechanism makes it easy to manage async logic in Redux Toolkit while keepin
 
 
 ### --------------- here the useToast or Toaster used to display the toster ---------------------
+
+
+## -------------- 
+1)  download the skeleton to apply the loader 
+2)  npx shadcn@latest add skeleton
+3)  or install the  npm i react-loader-spinner 
