@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
+const authRoutes = require("./routers/auth/auth-routes");
 
 
 mongoose
@@ -35,6 +35,8 @@ app.use(
   );
   app.use(cookieParser());
   app.use(express.json()); // Parse JSON request bodies
+  // define the routes for the auth module
+  app.use("/api/auth", authRoutes);
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
