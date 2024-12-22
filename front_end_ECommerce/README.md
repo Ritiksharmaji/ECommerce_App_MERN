@@ -556,3 +556,11 @@ This mechanism makes it easy to manage async logic in Redux Toolkit while keepin
 1)  download the skeleton to apply the loader 
 2)  npx shadcn@latest add skeleton
 3)  or install the  npm i react-loader-spinner 
+4)  
+
+
+## ---- working with admin pannel -------------------------
+1) to download some icons ffollow this website we can use the react-icons also
+2) https://lucide.dev/icons/
+3) now download the sheet componnet from the  https://ui.shadcn.com/docs/components/sheet for that write the below command
+4) npx shadcn@latest add sheet

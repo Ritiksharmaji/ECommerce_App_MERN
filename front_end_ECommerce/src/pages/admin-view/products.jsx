@@ -2,9 +2,11 @@
 function AdminProducts() {
   
   return (
-    <Fragment>
+   
+      <>
       Admin Product pages
-    </Fragment>
+      </>
+   
   );
 }
 
