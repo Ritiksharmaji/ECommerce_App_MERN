@@ -564,3 +564,17 @@ This mechanism makes it easy to manage async logic in Redux Toolkit while keepin
 2) https://lucide.dev/icons/
 3) now download the sheet componnet from the  https://ui.shadcn.com/docs/components/sheet for that write the below command
 4) npx shadcn@latest add sheet
+5) to install the Cart 
+6) npx shadcn@latest add card
+7) to store the uploaded image in cloud we have to use the  https://cloudinary.com/home 
+8) ![alt text](image.png)
+9) ![alt text](image-1.png)
+10) to use the cloudinary first we have to download the dependency of it which is already done
+11) then first select the Choose an SDK either node-js, python, java, react-js, next-js etc
+12) in out application we are going to use the node-js SDK
+13) then Install Cloudinary to Get the Cloudinary Node.js SDK by using the below command
+14) npm i cloudinary
+15) then Upload, Optimize and Transform:> for that we need to confure the Cloud name , API key,API secret	, API environment variable into our application 
+16) --------------- so work with backend now-----------------------------------
+17) 
+
