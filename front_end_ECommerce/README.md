@@ -1277,3 +1277,7 @@ function AddProductForm() {
 This component is designed to handle forms with varied fields (inputs, dropdowns, text areas, etc.) efficiently, making it ideal for use in projects with dynamic or repetitive forms.
 
 25) ## --- woring with shopping components -------------------------------------------
+26) download the dropdown menu by: npx shadcn@latest add dropdown-menu
+27) download the avatar by : npx shadcn@latest add avatar
+28) 
+
