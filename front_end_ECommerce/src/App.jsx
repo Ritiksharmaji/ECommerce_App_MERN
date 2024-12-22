@@ -41,12 +41,12 @@ function App() {
 
  
   // if (isLoading) return <div>Loading.....</div>;
-  // if (isLoading) return <Skeleton className="w-[100px] h-[20px] rounded-full" />;
-  if (isLoading) return (
-    <div className="products-loader-container">
-      <ThreeDots color="#0b69ff" height={50} width={50} />
-    </div>
-  )
+  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  // if (isLoading) return (
+  //   <div className="products-loader-container">
+  //     <ThreeDots color="#0b69ff" height={50} width={50} />
+  //   </div>
+  // )
 
   console.log(isLoading, user);
 
