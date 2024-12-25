@@ -1288,9 +1288,11 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
 
     2) create a js object in config folder/index.js filer as filterOptions which holder all the options and data related to filter feature like: filter by brand, category etc..
     3) download the checkbox item also from that ui.shadcn.com for that : npx shadcn@latest add checkbox
-    4) creating the right side component of filter is done without the selecting feactture based on click option only static feature is done
+    4) creating the left side component of filter is done without the selecting feactture based on click option only static feature is done
     5) ![alt text](image-2.png)
-    6) 
+    6) ## ---working with right side of listing component of shopping.-------
+    7) 
+    8) 
 
 31) dsdsdf
   
