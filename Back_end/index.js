@@ -5,7 +5,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRoutes = require("./routers/auth/auth-routes");
 const adminProductsRouter = require("./routers/admin/products-routes");
-
+//const shopProductsRouter = require("./routes/shop/products-routes");
+const shopProductsRouter = require("./routers/shop/products-routes");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -40,6 +41,7 @@ app.use(
   app.use("/api/auth", authRoutes);
 
   app.use("/api/admin/products", adminProductsRouter);
+  app.use("/api/shop/products", shopProductsRouter);
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

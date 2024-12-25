@@ -1294,7 +1294,13 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
     7) create a js object in @confi file name as sortOptions so that we can sort the product based on those element of sortOptions 
     8) ![alt text](image-3.png)
     9) now we have to fetch the list of product to display in webpage.
-    10) 
+    10) now are going to create a component as product-tile.jsx as the Admin-tile.jsx to render the list of product.
+    11) to diplay the list in a proper way like badge as for that we are installing the badge by follow: npx shadcn@latest add badge
+    12) what is badge: Displays a badge or a component that looks like a badge.
+    13) create a shop container in backend and files also..
+    14) backend done
+    15) create slice and redux for shop details in frontend
+    16) 
 
 31) dsdsdf
   
