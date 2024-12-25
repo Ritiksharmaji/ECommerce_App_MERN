@@ -1,6 +1,7 @@
 ## --------------- 
 
-1) fdsf
+1
+1) to run the application : node index.js or  npm run dev
 2) install all the dependeies : npm install cloudinary@^2.4.0 cookie-parser@^1.4.6 cors@^2.8.5 dotenv@^16.4.5 express@^4.19.2 jsonwebtoken@^9.0.2 mongoose@^8.5.3 multer@^1.4.5-lts.1 nodemon@^3.1.4 bcryptjs@^2.4.3 paypal-rest-sdk@^1.8.1
 3) description for all the dependecies 
 4)  Here’s a brief explanation for each of the dependencies which we want to install:

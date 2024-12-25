@@ -1,3 +1,5 @@
+## ------- 
+
 ## ---------------- install the all the below dependeies -------
 1) npm install @reduxjs/toolkit@^2.2.7 axios@^1.7.4 class-variance-authority@^0.7.0 clsx@^2.1.1 lucide-react@^0.429.0 react@^18.3.1 react-dom@^18.3.1 react-redux@^9.1.2 react-router-dom@^6.26.1 tailwind-merge@^2.5.2 tailwindcss-animate@^1.0.7
 2) Here’s a short description for each of the dependencies:
@@ -1279,5 +1281,18 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
 25) ## --- woring with shopping components -------------------------------------------
 26) download the dropdown menu by: npx shadcn@latest add dropdown-menu
 27) download the avatar by : npx shadcn@latest add avatar
-28) 
+28) ## --------------------------------------------------------------------
+29) ## -----------------now working with listing page -----------
+30) to work with listing page first we have to create some sub-componnets of shoping-view componets
+    1) filter component : to create a filter component we have to download some ui component so that we should not write code to create then those will be download from ui.shadcn.com which will autometically create a component in ul folder of component master folder. so, to download then write the command in ternimal as : npx shadcn@latest add separator
+
+    2) create a js object in config folder/index.js filer as filterOptions which holder all the options and data related to filter feature like: filter by brand, category etc..
+    3) download the checkbox item also from that ui.shadcn.com for that : npx shadcn@latest add checkbox
+    4) creating the right side component of filter is done without the selecting feactture based on click option only static feature is done
+    5) ![alt text](image-2.png)
+    6) 
+
+31) dsdsdf
+  
+    
 
