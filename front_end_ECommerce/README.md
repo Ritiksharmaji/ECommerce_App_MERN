@@ -1301,7 +1301,7 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
     14) backend done
     15) create slice and redux for shop details in frontend
     16) ![alt text](image-4.png)
-    17) ### --- next display the query parameter which are select by user in url...... 
+    17) ### --- next display the query parameter which are select by user in url......  
 
 31) dsdsdf
   
