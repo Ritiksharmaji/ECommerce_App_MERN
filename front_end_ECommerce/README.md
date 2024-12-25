@@ -1291,8 +1291,10 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
     4) creating the left side component of filter is done without the selecting feactture based on click option only static feature is done
     5) ![alt text](image-2.png)
     6) ## ---working with right side of listing component of shopping.-------
-    7) 
-    8) 
+    7) create a js object in @confi file name as sortOptions so that we can sort the product based on those element of sortOptions 
+    8) ![alt text](image-3.png)
+    9) now we have to fetch the list of product to display in webpage.
+    10) 
 
 31) dsdsdf
   
