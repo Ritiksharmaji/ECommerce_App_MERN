@@ -16,6 +16,30 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
+
+
+
+// Helper function to create a query string from the filters Object
+// - Converts the object to an array of key-value pairs and encodes them as a query string 
+// - Returns the query string as a string 
+function createSearchParamsHelper(filterParams) {
+  const queryParams = [];
+
+  // Iterate over the object entries and create a query string for each key-value pair
+  // - If the value is an array, join the array elements with a comma separator else use the value as is 
+  for (const [key, value] of Object.entries(filterParams)) {
+    if (Array.isArray(value) && value.length > 0) {
+      const paramValue = value.join(",");
+
+      queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
+    }
+  }
+
+  console.log(queryParams, "queryParams");
+
+  return queryParams.join("&");
+}
+
 function ShoppingListing() {
   // Initialize Redux's dispatch and toast hooks
   const dispatch = useDispatch();
@@ -72,6 +96,24 @@ function ShoppingListing() {
     setSort("price-lowtohigh"); // Default sorting
   }, []);
 
+
+  // Effect to update the URL query string whenever filters change 
+  console.log(filters ,searchParams , "filters", "searchParams");
+
+  useEffect(() => {
+    if (filters && Object.keys(filters).length > 0) {
+      // Create query string when filters exist
+      // Helper function to create a query string from the filters object 
+      // - Converts the object to an array of key-value pairs and encodes them as a query string 
+      const createQueryString = createSearchParamsHelper(filters);
+      setSearchParams(new URLSearchParams(createQueryString));
+    }
+    else {
+      // Clear query parameters when no filters exist
+      setSearchParams({});
+    }
+  }, [filters, setSearchParams]);
+
   
   /**
    * Effect to fetch filtered products whenever filters or sort options change
@@ -79,6 +121,7 @@ function ShoppingListing() {
   useEffect(() => {
     if (filters !== null && sort !== null) {
       dispatch(
+        // Dispatch the fetchAllFilteredProducts action with the filters and sort options as the payload
         fetchAllFilteredProducts({ filterParams: filters, sortParams: sort })
       ).catch((error) => {
         toast({

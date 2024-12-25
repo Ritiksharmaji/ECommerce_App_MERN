@@ -11,17 +11,20 @@ export const fetchAllFilteredProducts = createAsyncThunk(
   "/products/fetchAllProducts",
 
   
+  // The payload creator receives the partial state and can be destructured to get the filters and sort options  
   async ({ filterParams, sortParams }) => {
     console.log("helooo")
     console.log(fetchAllFilteredProducts, "fetchAllFilteredProducts");
 
+    // Create a query string from the filters and sort options 
     const query = new URLSearchParams({
       ...filterParams,
       sortBy: sortParams,
     });
 
-    const result = await axios.get(
-      `http://localhost:5000/api/shop/products/get`
+     // Add the `?` before the query string
+     const result = await axios.get(
+      `http://localhost:5000/api/shop/products/get?${query}`
     );
 
     console.log(result,'result');
