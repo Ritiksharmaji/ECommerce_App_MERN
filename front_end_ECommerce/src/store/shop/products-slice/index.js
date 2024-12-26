@@ -8,9 +8,7 @@ const initialState = {
 };
 
 export const fetchAllFilteredProducts = createAsyncThunk(
-  "/products/fetchAllProducts",
-
-  
+  "/products/fetchAllProducts",  
   // The payload creator receives the partial state and can be destructured to get the filters and sort options  
   async ({ filterParams, sortParams }) => {
     console.log("helooo")

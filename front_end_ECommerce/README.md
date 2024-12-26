@@ -1302,8 +1302,10 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
     15) create slice and redux for shop details in frontend
     16) ![alt text](image-4.png)
     17) ### --- next display the query parameter which are select by user in url......  
+    18) ![alt text](image-6.png)
 
-31) dsdsdf
+31) ### ---------------- display the details of productt using the dialog component of ui.shadcn.com
+32) ![alt text](image-5.png)
   
     
 

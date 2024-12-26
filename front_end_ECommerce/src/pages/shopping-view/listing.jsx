@@ -1,4 +1,5 @@
 import ProductFilter from "@/components/shopping-view/filter";
+import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
 import { sortOptions } from "@/config";
-import { fetchAllFilteredProducts } from "@/store/shop/products-slice";
+import { fetchAllFilteredProducts, fetchProductDetails } from "@/store/shop/products-slice";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,12 +44,18 @@ function createSearchParamsHelper(filterParams) {
 function ShoppingListing() {
   // Initialize Redux's dispatch and toast hooks
   const dispatch = useDispatch();
-  const { productList = [] } = useSelector((state) => state.shopProducts); // Get the product list from the Redux store, defaulting to an empty array
+  //const { productList = [] } = useSelector((state) => state.shopProducts); // Get the product list from the Redux store, defaulting to an empty array
+
+  const { productList, productDetails } = useSelector(
+    (state) => state.shopProducts
+  );
 
   const [filters, setFilters] = useState({}); // State to manage filters
   const [sort, setSort] = useState(null); // State to manage selected sorting option
   const [searchParams, setSearchParams] = useSearchParams(); // Hook to manipulate the query string in the URL
   const { toast } = useToast(); // Hook for showing toast notifications
+  // this is for show the user details on dailog...
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   /**
    * Function to handle the sorting of products
@@ -133,6 +140,21 @@ function ShoppingListing() {
     }
   }, [dispatch, sort, filters, toast]);
 
+console.log(productDetails, "productDetails in listing");
+
+//  this is for fetch the data for the dailog.
+useEffect(() => {
+  if (productDetails !== null) setOpenDetailsDialog(true);
+}, [productDetails]);
+
+
+// 
+  function handleGetProductDetails(getCurrentProductId) {
+    console.log(getCurrentProductId);
+    dispatch(fetchProductDetails(getCurrentProductId));
+  }
+
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
       {/* Left Section: Product Filters */}
@@ -181,13 +203,21 @@ function ShoppingListing() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           {productList.length > 0 ? (
             productList.map((productItem) => (
-              <ShoppingProductTile product={productItem} key={productItem.id} />
+              <ShoppingProductTile 
+              handleGetProductDetails={handleGetProductDetails}
+              product={productItem} key={productItem.id} />
             ))
           ) : (
             // Message displayed when no products are found
             <p className="text-center text-muted-foreground">No products found</p>
           )}
         </div>
+
+        <ProductDetailsDialog
+        open={openDetailsDialog}
+        setOpen={setOpenDetailsDialog}
+        productDetails={productDetails}
+      />
       </div>
     </div>
   );
