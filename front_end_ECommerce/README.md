@@ -1306,6 +1306,12 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
 
 31) ### ---------------- display the details of productt using the dialog component of ui.shadcn.com
 32) ![alt text](image-5.png)
+33) ![alt text](image-7.png)
+34) display the details of product is done
+### --------------------------- end --------------------------------------------------
+
+### ------------------------   working with the cart ---------------------------------------------------
+1) 
   
     
 
