@@ -19,10 +19,11 @@ import {
 } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { logoutUser } from "@/store/auth-slice";
-//import UserCartWrapper from "./cart-wrapper";
+import UserCartItemsContent from "./cart-items-content";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
+import UserCartWrapper from "./cart-wrapper";
 
 function MenuItems() {
   const navigate = useNavigate();
@@ -83,28 +84,15 @@ function HeaderRightContent() {
 
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
-      <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
-        <Button
-          onClick={() => setOpenCartSheet(true)}
-          variant="outline"
-          size="icon"
-          className="relative"
-        >
-          <ShoppingCart className="w-6 h-6" />
-          <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
-            {cartItems?.items?.length || 0}
-          </span>
-          <span className="sr-only">User cart</span>
-        </Button>
-        {/* <UserCartWrapper
-          setOpenCartSheet={setOpenCartSheet}
-          cartItems={
-            cartItems && cartItems.items && cartItems.items.length > 0
-              ? cartItems.items
-              : []
-          }
-        /> */}
-      </Sheet>
+     
+     <Sheet open={openCartSheet} onOpenChange={()=> setOpenCartSheet(false)}>
+      <Button variant="outline" size="icon" onClick={()=>setOpenCartSheet(true)}>
+        <ShoppingCart className="w-6 h-6"/>
+         <span className="sr-only">User cart</span>
+
+      </Button>
+      <UserCartWrapper/>
+     </Sheet>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

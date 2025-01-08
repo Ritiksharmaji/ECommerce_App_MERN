@@ -1311,7 +1311,31 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
 ### --------------------------- end --------------------------------------------------
 
 ### ------------------------   working with the cart ---------------------------------------------------
-1) 
+1) create the slice for the cart : store/shop/cart-slice/index.js
+2) after create the slice import in store.js and configure it
+   1)  details of store.js file code
+        ### **Explanation of Key Sections**
+        1. **`configureStore`**: 
+          - This function from `@reduxjs/toolkit` is used to set up the Redux store. It automatically handles some configuration like enabling the Redux DevTools extension and applying middleware.
+
+        2. **Reducers**:
+          - Each key in the `reducer` object corresponds to a slice of the Redux state.
+          - `auth`: Handles the authentication state (e.g., user login status).
+          - `adminProducts`: Manages the state for products that the admin is managing.
+          - `shopCart`: Manages the cart items, including adding/removing items and updating quantities.
+          - `shopProducts`: Handles the state of products available in the shop.
+
+        3. **Export**: 
+          - The configured store is exported for use in the main app, where it will be passed to the `<Provider>` component from `react-redux` to make it available throughout the app.
+
+        ### **Benefits**
+        - **Centralized State Management**: All states related to authentication, admin products, shop cart, and products are centrally managed.
+        - **Scalability**: New slices can be added by simply importing and adding them to the `reducer` object.
+        - **Simplicity**: `configureStore` simplifies store setup and automatically applies best practices.
+
+3) after that go to shop comonent in header  wrap the cart  into sheet component of UI.for that we are creating the cart wapper and a others cart-items-content.jsx.
+4) ![alt text](image-8.png)
+5) 
   
     
 

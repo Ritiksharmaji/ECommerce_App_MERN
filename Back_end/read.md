@@ -174,3 +174,9 @@ Let me know if you'd like an example of setting and reading cookies!
 24) 
 
 
+### ----------------- Woking with cart ---------------------
+1) create a model for cart: Cart.js
+2) create a controller for that cart : cart-controller.js 
+3) then after create the controller create the route for it: routers/shop/cart-routes.js
+4) after creating the all moduls=> conroller=> route=> then go to app.js or index.js and import cart route
+5)  
