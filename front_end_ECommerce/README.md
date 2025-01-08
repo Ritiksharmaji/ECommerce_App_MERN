@@ -1335,7 +1335,11 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
 
 3) after that go to shop comonent in header  wrap the cart  into sheet component of UI.for that we are creating the cart wapper and a others cart-items-content.jsx.
 4) ![alt text](image-8.png)
-5) 
+5) ![alt text](image-9.png)
+
+
+## --------------- working with home page ---------------------------------------------------------------------
+1) 
   
     
 

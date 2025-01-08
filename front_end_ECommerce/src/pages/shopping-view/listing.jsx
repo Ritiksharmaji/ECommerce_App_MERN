@@ -9,8 +9,10 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useToast } from "@/components/ui/use-toast";
+//import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { sortOptions } from "@/config";
+import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { fetchAllFilteredProducts, fetchProductDetails } from "@/store/shop/products-slice";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -50,10 +52,15 @@ function ShoppingListing() {
     (state) => state.shopProducts
   );
 
+  // to get the login user
+  const{user} = useSelector(state=>state.auth)
+
+  
+
   const [filters, setFilters] = useState({}); // State to manage filters
   const [sort, setSort] = useState(null); // State to manage selected sorting option
   const [searchParams, setSearchParams] = useSearchParams(); // Hook to manipulate the query string in the URL
-  const { toast } = useToast(); // Hook for showing toast notifications
+  const { toast } = useToast(); // Hook for showing toast notifications when we add the carts
   // this is for show the user details on dailog...
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
@@ -154,6 +161,37 @@ useEffect(() => {
     dispatch(fetchProductDetails(getCurrentProductId));
   }
 
+  function handleAddtoCart(getCurrentProductId) {
+    console.log(getCurrentProductId, ": product id");
+  
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
+      })
+    )
+      .then((data) => {
+        console.log(data, "cart data");
+        if (data?.payload?.success) {
+          dispatch(fetchCartItems(user?.id));
+          console.log("Toast will be shown now.");
+          toast({
+            title: "Product added to cart!",
+            description: "The product has been successfully added to your cart.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          console.error("Failed to add product to cart");
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart:", error);
+      });
+  }
+  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
@@ -205,7 +243,10 @@ useEffect(() => {
             productList.map((productItem) => (
               <ShoppingProductTile 
               handleGetProductDetails={handleGetProductDetails}
-              product={productItem} key={productItem.id} />
+              product={productItem} key={productItem.id}
+              
+              handleAddtoCart={handleAddtoCart}
+              />
             ))
           ) : (
             // Message displayed when no products are found

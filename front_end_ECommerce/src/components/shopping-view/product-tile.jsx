@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 import { Badge } from "../ui/badge";
 
-function ShoppingProductTile({product,  handleGetProductDetails,}) {
+function ShoppingProductTile({product,  handleGetProductDetails,handleAddtoCart}) {
   return (
     <Card className="w-full max-w-sm mx-auto">
       <div onClick={() => handleGetProductDetails(product?._id)}>

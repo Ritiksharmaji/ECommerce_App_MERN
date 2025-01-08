@@ -5,8 +5,51 @@ import { Button } from '../ui/button';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
 import { Input } from '../ui/input';
+import { addToCart, fetchCartItems } from '@/store/shop/cart-slice';
+import { useDispatch, useSelector } from "react-redux";
+
+import { useToast } from "@/hooks/use-toast";
 
 const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
+
+  console.log(productDetails,"productDetails in details page");
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { toast } = useToast();
+
+   function handleAddtoCart(getCurrentProductId) {
+
+    console.log("handleAddtocart call in the ProductDetailsDialog");
+    console.log(getCurrentProductId, ": product id");
+
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
+      })
+    ).then((data) => {
+        console.log(data, "cart data");
+        if (data?.payload?.success) {
+          dispatch(fetchCartItems(user?.id));
+          console.log("Toast will be shown now.");
+          toast({
+            title: "Product added to cart!",
+            description: "The product has been successfully added to your cart.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          console.error("Failed to add product to cart");
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart:", error);
+      });
+  }
+  
+
   return (
     // Dialog component to display the product details modal
     <Dialog open={open} onOpenChange={setOpen}>
@@ -29,6 +72,7 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
           {/* Product title and description */}
           <div>
             <h1 className="text-3xl font-extrabold">{productDetails?.title}</h1>
+            {/* <h1 className="text-3xl font-extrabold">{productDetails?._id}</h1> */}
             <p className="text-muted-foreground text-2xl mb-5 mt-4">
               {productDetails?.description}
             </p>
@@ -66,7 +110,7 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
 
           {/* Add to cart button */}
           <div className="mt-5 mb-5">
-            <Button className="w-full">Add to Cart</Button>
+            <Button className="w-full" onClick ={()=> handleAddtoCart(productDetails?._id)}>Add to Cart</Button>
           </div>
 
           {/* Separator for dividing sections */}

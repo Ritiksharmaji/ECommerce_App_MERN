@@ -29,6 +29,7 @@ function MenuItems() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+   
 
   function handleNavigate(getCurrentMenuItem) {
     sessionStorage.removeItem("filters");
@@ -67,20 +68,26 @@ function MenuItems() {
 
 function HeaderRightContent() {
   const { user } = useSelector((state) => state.auth);
-  const { cartItems } = useSelector((state) => state.shopCart);
   const [openCartSheet, setOpenCartSheet] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // getting all the carts
+  const{cartItems} = useSelector(state=> state.shopCart);
+
+  // log the cartitems 
+  console.log(cartItems,":cartItems");
 
   function handleLogout() {
     dispatch(logoutUser());
   }
 
+  // to get the all cart 
   useEffect(() => {
     dispatch(fetchCartItems(user?.id));
   }, [dispatch]);
 
-  console.log(cartItems, "sangam");
+  console.log(cartItems, "all cartitems are");
 
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
@@ -91,7 +98,13 @@ function HeaderRightContent() {
          <span className="sr-only">User cart</span>
 
       </Button>
-      <UserCartWrapper/>
+      <UserCartWrapper
+          cartItems={
+            cartItems && cartItems.items && cartItems.items.length > 0
+              ? cartItems.items
+              : []
+          }
+        />
      </Sheet>
 
       <DropdownMenu>
