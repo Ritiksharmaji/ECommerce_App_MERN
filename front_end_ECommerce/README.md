@@ -1346,7 +1346,9 @@ then go for same page then
 ![alt text](<Screenshot 2025-02-23 225217-1.png>)
 
 ## --------------- working with home page ---------------------------------------------------------------------
-1) 
+1) ![alt text](image-10.png)
+2) ![alt text](image-11.png)
+3) ![alt text](image-12.png)
   
     
 
