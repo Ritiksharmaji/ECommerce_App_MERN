@@ -1338,6 +1338,13 @@ This component is designed to handle forms with varied fields (inputs, dropdowns
 5) ![alt text](image-9.png)
 
 
+## ------------ fixing a problem when we are open a product details and to close it if we are not using the crose arrow and we are closing it by clicking on other part of page and we are opning the other page again when we are comming to this page then automiticacy tht product detils page is opend to fix we  
+
+![alt text](<Screenshot 2025-02-23 225217.png>)
+![alt text](<Screenshot 2025-02-23 225228.png>)
+then go for same page then
+![alt text](<Screenshot 2025-02-23 225217-1.png>)
+
 ## --------------- working with home page ---------------------------------------------------------------------
 1) 
   

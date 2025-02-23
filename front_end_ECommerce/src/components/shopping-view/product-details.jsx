@@ -9,6 +9,7 @@ import { addToCart, fetchCartItems } from '@/store/shop/cart-slice';
 import { useDispatch, useSelector } from "react-redux";
 
 import { useToast } from "@/hooks/use-toast";
+import { setProductDetails } from '@/store/shop/products-slice';
 
 const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
 
@@ -48,11 +49,16 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
         console.error("Error adding product to cart:", error);
       });
   }
+  function handleDialogClose() {
+    setOpen(false);
+    // to prevent the dialog from reopening with the previous product details when we did not close the dialog and when to other page.
+    dispatch(setProductDetails());
+  }
   
 
   return (
     // Dialog component to display the product details modal
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogClose}>
       {/* DialogContent holds the main content of the dialog */}
       <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
         
