@@ -6,12 +6,17 @@ import { Airplay, BabyIcon, ChevronLeftIcon, ChevronRightIcon, CloudLightning, H
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllFilteredProducts } from '@/store/shop/products-slice';
+import { fetchAllFilteredProducts,fetchProductDetails } from '@/store/shop/products-slice';
 import ShoppingProductTile from '@/components/shopping-view/product-tile';
+import { useNavigate } from 'react-router-dom';
+import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
+import { useToast } from "@/components/ui/use-toast";
+import ProductDetailsDialog from "@/components/shopping-view/product-details";
 
 const ShoppingHome = () => {
     const slides = [bannerOne, bannerTwo, bannerThree];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
 
     const categoriesWithIcon = [
         { id: "men", label: "Men", icon: ShirtIcon },
@@ -30,8 +35,13 @@ const ShoppingHome = () => {
         { id: "h&m", label: "H&M", icon: Heater },
       ];
 
-    const{productList} = useSelector((state) => state.shopProducts);
+      const { productList, productDetails } = useSelector(
+        (state) => state.shopProducts
+      );
+      const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
     const dispatch = useDispatch();
+    const { toast } = useToast();
+    const { user } = useSelector((state) => state.auth);
 
     console.log("productList", productList);
 
@@ -50,6 +60,44 @@ const ShoppingHome = () => {
 
         return () => clearInterval(interval);
     }, []);
+
+
+    useEffect(() => {
+        if (productDetails !== null) setOpenDetailsDialog(true);
+      }, [productDetails]);
+
+
+    function handleNavigateToListingPage(getCurrentItem, section) {
+        sessionStorage.removeItem("filters"); // Clear old filters
+        const currentFilter = {
+            [section]: [getCurrentItem.id], // Store selected category/brand
+        };
+    
+        sessionStorage.setItem("filters", JSON.stringify(currentFilter)); // Save to sessionStorage
+        navigate(`/shop/listing`); // Navigate to the listing page
+    }
+
+
+    function handleGetProductDetails(getCurrentProductId) {
+        dispatch(fetchProductDetails(getCurrentProductId));
+      }
+    
+      function handleAddtoCart(getCurrentProductId) {
+        dispatch(
+          addToCart({
+            userId: user?.id,
+            productId: getCurrentProductId,
+            quantity: 1,
+          })
+        ).then((data) => {
+          if (data?.payload?.success) {
+            dispatch(fetchCartItems(user?.id));
+            toast({
+              title: "Product is added to cart",
+            });
+          }
+        });
+      }
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -92,11 +140,15 @@ const ShoppingHome = () => {
                 <div className="container mx-auto px-4">
                     <h2 className='text-3xl font-bold text-center mb-8'>Shop by Category</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                        {categoriesWithIcon.map((item) => (
-                            <Card key={item.id} className="cursor-pointer hover:shadow-lg transition-shadow">
+                        {categoriesWithIcon.map((categoryItem) => (
+                            <Card 
+                            onClick={() =>
+                                handleNavigateToListingPage(categoryItem, "category")
+                            }
+                            key={categoryItem.id} className="cursor-pointer hover:shadow-lg transition-shadow">
                                 <CardContent className="flex flex-col items-center justify-center p-6">
-                                    {item.icon && <item.icon className="w-12 h-12 mb-4 text-primary" />}
-                                    <span className='font-bold'>{item.label}</span>
+                                    {categoryItem.icon && <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />}
+                                    <span className='font-bold'>{categoryItem.label}</span>
                                 </CardContent>
                             </Card>
                         ))}
@@ -110,7 +162,9 @@ const ShoppingHome = () => {
                     <h2 className='text-3xl font-bold text-center mb-8'>Shop by Category</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         {brandsWithIcon.map((branditem) => (
-                            <Card key={branditem.id} className="cursor-pointer hover:shadow-lg transition-shadow">
+                            <Card 
+                            onClick={() => handleNavigateToListingPage(branditem, "brand")}
+                            key={branditem.id} className="cursor-pointer hover:shadow-lg transition-shadow">
                                 <CardContent className="flex flex-col items-center justify-center p-6">
                                     {branditem.icon && <branditem.icon className="w-12 h-12 mb-4 text-primary" />}
                                     <span className='font-bold'>{branditem.label}</span>
@@ -128,11 +182,25 @@ const ShoppingHome = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {productList && productList.length > 0
-              ? productList.map((productItem) => <ShoppingProductTile product={productItem}/>)
+              ? productList.map((productItem) => (
+                  <ShoppingProductTile
+                    handleGetProductDetails={handleGetProductDetails}
+                    product={productItem}
+                    handleAddtoCart={handleAddtoCart}
+                    key={productItem.id}
+                  />
+                ))
               : null}
             </div>  
             </div>
             </section>
+
+            <ProductDetailsDialog
+        open={openDetailsDialog}
+        setOpen={setOpenDetailsDialog}
+        productDetails={productDetails}
+      />
+    
         </div>
     );
 };
