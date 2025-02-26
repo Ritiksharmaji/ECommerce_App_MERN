@@ -1,5 +1,8 @@
 ## ------- 
+npm run dev
 
+## admin: vignan@gmail.com
+pass: vignan1234
 ## ---------------- install the all the below dependeies -------
 1) npm install @reduxjs/toolkit@^2.2.7 axios@^1.7.4 class-variance-authority@^0.7.0 clsx@^2.1.1 lucide-react@^0.429.0 react@^18.3.1 react-dom@^18.3.1 react-redux@^9.1.2 react-router-dom@^6.26.1 tailwind-merge@^2.5.2 tailwindcss-animate@^1.0.7
 2) Here’s a short description for each of the dependencies:
